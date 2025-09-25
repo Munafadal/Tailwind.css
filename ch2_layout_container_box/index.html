@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tailwind Container & Box Example</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="p-6 bg-gray-300">
+    <!-- Container centers content and adds responsive padding -->
+    <div class="container mx-auto bg-white p-6 rounded shadow mb-6">
+      <h1 class="text-2xl font-bold mb-4 bg-blue-100">Container & Box Examples</h1>
+    </div>
+
+    <!-- Box border vs box content -->
+    <div class="mb-6 bg-red-200 flex gap-4">
+      <div
+        class="w-40 h-20 p-4 border-4 border-blue-500 box-border bg-blue-100"
+      >
+        box-border
+      </div>
+     
+       <div
+        class="w-40 h-20 p-4 border-4 border-green-500 box-content bg-green-100"
+      >
+        box-content
+      </div>
+      
+    </div>
+
+    <!-- Display utilities -->
+    <div class="mb-6">
+      <span class="block bg-purple-200 p-9 mb-1">block</span>
+      <span class="inline-block bg-blue-600 p-5 mb-6">inline-block</span>
+      <span class="inline bg-orange-800 p-3">inline</span>
+    </div>
+
+    <!-- Flexbox and Grid -->
+    <!-- <div class="mb-6">
+      <div class="flex gap-2 bg-blue-100 p-2 mb-2">
+        <div class="bg-blue-400 text-white p-2">Flex 1</div>
+        <div class="bg-blue-500 text-white p-2">Flex 2</div>
+      </div>
+      <div class="grid grid-cols-3 gap-2 bg-green-100 p-2">
+        <div class="bg-green-400 text-white p-2">Grid 1</div>
+        <div class="bg-green-500 text-white p-2">Grid 2</div>
+        <div class="bg-green-600 text-white p-2">Grid 3</div>
+      </div>
+    </div> -->
+
+    <!-- Contents: behaves like no wrapper -->
+    <!-- <div class="contents">
+      <p class="bg-purple-200 p-2 inline-block">Child 1 (contents)</p>
+      <p class="bg-purple-300 p-2 inline-block">Child 2 (contents)</p>
+    </div> -->
+
+    <!-- Hidden -->
+    <!-- <div class="hidden bg-red-200 p-2 mt-4">
+      You won’t see me (hidden).
+    </div> -->
+  </body>
+</html>
