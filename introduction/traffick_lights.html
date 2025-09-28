@@ -1,65 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Tailwind Traffic Lights with JS</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Light</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen flex items-center justify-center bg-neutral-900 p-8">
-  <!-- Vertical traffic light -->
-  <figure class="bg-neutral-800 rounded-3xl p-4 shadow-2xl shadow-black/60 border border-neutral-700">
-    <div class="flex flex-col gap-4">
-      <!-- RED -->
-      <div id="red" class="size-16 rounded-full bg-red-700/25 ring-2 ring-red-300/10"></div>
-      <!-- YELLOW -->
-      <div id="yellow" class="size-16 rounded-full bg-yellow-700/25 ring-2 ring-yellow-300/10"></div>
-      <!-- GREEN -->
-      <div id="green" class="size-16 rounded-full bg-emerald-700/25 ring-2 ring-emerald-300/10"></div>
+<body class="bg-gray-200 flex justify-center items-center h-screen">
+
+    <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
+        <div class="space-y-4">
+            <!-- Red Light -->
+            <div id="red" class="w-20 h-20 bg-red-600 rounded-full mx-auto opacity-40"></div>
+            <!-- Yellow Light -->
+            <div id="yellow" class="w-20 h-20 bg-yellow-500 rounded-full mx-auto opacity-40"></div>
+            <!-- Green Light -->
+            <div id="green" class="w-20 h-20 bg-green-500 rounded-full mx-auto opacity-40"></div>
+        </div>
     </div>
-  </figure>
 
-  <script>
-    // Utility: turn a light "on" or "off"
-    function turnOn(el, color) {
-      el.className = `size-16 rounded-full bg-${color}-500 ring-2 ring-${color}-300/50 shadow-[0_0_30px_6px_rgba(0,0,0,0.4)]`;
-      if (color === "red") el.classList.add("shadow-[0_0_30px_6px_rgba(220,38,38,0.65)]");
-      if (color === "yellow") el.classList.add("shadow-[0_0_30px_6px_rgba(234,179,8,0.65)]");
-      if (color === "emerald") el.classList.add("shadow-[0_0_30px_6px_rgba(16,185,129,0.65)]");
-    }
+    <script>
+        // Get the light elements
+        const redLight = document.getElementById('red');
+        const yellowLight = document.getElementById('yellow');
+        const greenLight = document.getElementById('green');
 
-    function turnOff(el, color) {
-      el.className = `size-16 rounded-full bg-${color}-700/25 ring-2 ring-${color}-300/10`;
-    }
+        // Function to turn off all lights
+        function turnOffLights() {
+            redLight.classList.remove('opacity-100');
+            yellowLight.classList.remove('opacity-100');
+            greenLight.classList.remove('opacity-100');
+            redLight.classList.add('opacity-40');
+            yellowLight.classList.add('opacity-40');
+            greenLight.classList.add('opacity-40');
+        }
 
-    // Grab lights
-    const red = document.getElementById("red");
-    const yellow = document.getElementById("yellow");
-    const green = document.getElementById("green");
+        // Function to simulate the traffic light sequence
+        function cycleLights() {
+            // Turn off all lights first
+            turnOffLights();
 
-    // Sequence: Red → Green → Yellow → Red
-    function cycleLights() {
-      // RED on
-      turnOn(red, "red");
-      turnOff(yellow, "yellow");
-      turnOff(green, "emerald");
+            // Red light on
+            setTimeout(() => {
+                redLight.classList.remove('opacity-40');
+                redLight.classList.add('opacity-100');
+            }, 0);
 
-      setTimeout(() => {
-        // GREEN on
-        turnOff(red, "red");
-        turnOn(green, "emerald");
+            // Yellow light on after red
+            setTimeout(() => {
+                turnOffLights();
+                yellowLight.classList.remove('opacity-40');
+                yellowLight.classList.add('opacity-100');
+            }, 1500); // After 1.5 seconds (red)
 
-        setTimeout(() => {
-          // YELLOW on
-          turnOff(green, "emerald");
-          turnOn(yellow, "yellow");
+            // Green light on after yellow
+            setTimeout(() => {
+                turnOffLights();
+                greenLight.classList.remove('opacity-40');
+                greenLight.classList.add('opacity-100');
+            }, 3000); // After 3 seconds (yellow)
 
-          setTimeout(cycleLights, 2000); // Back to RED
-        }, 2000); // Green duration
-      }, 3000); // Red duration
-    }
+            // Turn off all lights after green
+            setTimeout(() => {
+                turnOffLights();
+            }, 4500); // After 4.5 seconds (green)
+        }
 
-    // Start
-    cycleLights();
-  </script>
+        // Start the cycle every 5 seconds
+        setInterval(cycleLights, 5000);
+
+        // Initial light cycle
+        cycleLights();
+    </script>
+
 </body>
 </html>
